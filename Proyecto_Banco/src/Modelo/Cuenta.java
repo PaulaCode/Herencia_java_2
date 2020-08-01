@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Modelo;
 
-/**
- *
- * @author frealgagu
- */
-public class Cuenta {
+public class Cuenta{
+    private double cuentabalance; 
+
+    public Cuenta(double cuentabalance) {
+        this.cuentabalance = cuentabalance;
+    }
+
+    public double getCuentabalance() {
+        return cuentabalance;
+    }
+
+    public void setCuentabalance(int cuentabalance) {
+        this.cuentabalance = cuentabalance;
+    }
+    
     
 }

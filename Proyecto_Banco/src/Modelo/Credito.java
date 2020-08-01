@@ -2,13 +2,14 @@ package Modelo;
 
 import java.util.ArrayList;
 
-public class Credito {
+public class Credito extends Cuenta{
 
     private ArrayList<TarjetaCredito> tarjetas = new ArrayList<>();
     static final double MONTO_MAX = 10000000;
    
-    public Credito(ArrayList<TarjetaCredito> tarjetas)
+    public Credito(ArrayList<TarjetaCredito> tarjetas,double balance)
     {
+        super(balance);
         this.tarjetas=tarjetas;
     }
     public void setListaTarjetas(ArrayList<TarjetaCredito> tarjetas)

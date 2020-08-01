@@ -2,7 +2,7 @@
 package Modelo;
 
 
-public class TarjetaCredito extends Cuenta{
+public class TarjetaCredito {
     private int numero_tarjeta;
     private double monto;
 
