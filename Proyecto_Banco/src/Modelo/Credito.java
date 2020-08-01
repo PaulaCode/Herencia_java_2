@@ -20,7 +20,18 @@ public class Credito extends Cuenta{
     {
         this.tarjetas.add(tarjeta);
     }
-
+    public double getTotal_monto()
+    {
+        double monto=0;
+        if(!this.tarjetas.isEmpty())
+        {
+            for(int i=0;i<tarjetas.size();i++)
+            {
+                monto+= tarjetas.get(i).getMonto();
+            }
+        }
+        return monto;
+    }
     @Override
     public String toString() {
         String mensaje="";
