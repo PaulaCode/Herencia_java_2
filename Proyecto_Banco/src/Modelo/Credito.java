@@ -1,14 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
-/**
- *
- * @author frealgagu
- */
+import java.util.ArrayList;
+
 public class Credito {
+
+    private ArrayList<TarjetaCredito> tarjetas = new ArrayList<>();
+    static final double MONTO_MAX = 10000000;
+   
+    public Credito(ArrayList<TarjetaCredito> tarjetas)
+    {
+        this.tarjetas=tarjetas;
+    }
+    public void setListaTarjetas(ArrayList<TarjetaCredito> tarjetas)
+    {
+        this.tarjetas=tarjetas;
+    }
+    public void setTarjeta(TarjetaCredito tarjeta)
+    {
+        this.tarjetas.add(tarjeta);
+    }
+
+    @Override
+    public String toString() {
+        String mensaje="";
+        for(int i =0;i<this.tarjetas.size();i++)
+        {
+            mensaje+="Número: "+this.tarjetas.toString();
+        }
+        return mensaje;
+    }
     
 }
