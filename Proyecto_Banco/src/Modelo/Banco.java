@@ -26,10 +26,11 @@ public class Banco {
         clientes.add(new Cliente(nombre,identificacion,direccion));
 
     }
-    public void menuCliente(){
+    
+    public void menuPrincipal(){
         
-         int opcion = inOut.solicitarEntero("1. Editar información"
-                + "\n2. Ver mis cuentas  ");
+         int opcion = inOut.solicitarEntero("1. Registrarse"
+                + "\n2. Banco.  ");
          
          switch(opcion){
              
@@ -44,9 +45,6 @@ public class Banco {
          }
         
     }
-    
-   
-
     
     public void crearCuentas(){
         
