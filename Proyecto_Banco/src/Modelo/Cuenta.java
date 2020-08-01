@@ -1,7 +1,7 @@
 
 package Modelo;
 
-public class Cuenta extends Cliente {
+public class Cuenta  {
     private int cuentabalance; 
 
     public Cuenta(int cuentabalance) {
