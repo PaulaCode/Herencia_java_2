@@ -24,11 +24,8 @@ public class Banco {
         
         String direccion = inOut.solicitarNombre("Digite su dirección: ");
         clientes.add(new Cliente(nombre,identificacion,direccion));
-        
-        crearCuentas();
-        
+
     }
-   
     public void menuCliente(){
         
          int opcion = inOut.solicitarEntero("1. Editar información"
@@ -48,12 +45,8 @@ public class Banco {
         
     }
     
-    public void mostrarCuentas(){
-        
-        
-        
-        
-    }
+   
+
     
     public void crearCuentas(){
         
@@ -103,8 +96,7 @@ public class Banco {
             }
                 
         }
-        
-        
+       
     }
     
     public boolean Verificarcc(int c) {

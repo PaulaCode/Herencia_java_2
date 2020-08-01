@@ -5,6 +5,8 @@ package Modelo;
 public class Cuenta  {
     private double cuentabalance; 
 
+
+
     public Cuenta(double cuentabalance) {
         this.cuentabalance = cuentabalance;
     }
