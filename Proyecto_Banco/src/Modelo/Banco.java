@@ -17,11 +17,25 @@ public class Banco {
     
     public void crearCliente(){
         
-        String nombre = inOut.solicitarNombre("Digite su nombre: ");
-        int identificacion = inOut.solicitarEntero("Digite su identificación: ");
-        String direccion = inOut.solicitarNombre("Digite su dirección: ");
+        int identificacion=0;
+        boolean verificar;
         
+        String nombre = inOut.solicitarNombre("Digite su nombre: ");
+        do{
+         identificacion = inOut.solicitarEntero("Digite su identificación: ");
+         verificar =   Verificarcc(identificacion);
+        }while(verificar != false);
+        
+        String direccion = inOut.solicitarNombre("Digite su dirección: ");
         clientes.add(new Cliente(nombre,identificacion,direccion));
+        
+    }
+    
+    public void crearCuentas(){
+        
+        inOut.solicitarEntero("1. Cuenta de crédito"
+                + "2. ");
+        
         
     }
     
@@ -34,8 +48,8 @@ public class Banco {
             if(cedula == clientes.get(i).getIdentificacion()){
                 
                 inOut.mostrarResultado("El cliente es "+clientes.get(i).getNombre()+"con"
-                        +   "\nDirección: "+clientes.get(i).getDireccion()
-                        
+                        +   "\nDirección: "+clientes.get(i).getDireccion() +  ", su"
+                        +   "cédula es: "+clientes.get(i).getIdentificacion()
                 );
                
             }
@@ -43,6 +57,16 @@ public class Banco {
         }
         
         
+    }
+    
+    public boolean Verificarcc(int c) {
+        boolean flag = false;
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getIdentificacion()== c) {
+                flag = true;
+            }
+        }
+        return flag;
     }
     
 }
