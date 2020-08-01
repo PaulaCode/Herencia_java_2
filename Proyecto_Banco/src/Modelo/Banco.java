@@ -18,9 +18,9 @@ public class Banco {
         String direccion = inOut.solicitarNombre("Digite su dirección: ");
         
         clientes.add(new Cliente(nombre,identificacion,direccion));
-        
+   
     }
-    
+
     public void buscarCliente(){
         
         int cedula = inOut.solicitarEntero("Digite el número de identificación del cliente que quiere buscar: ");
@@ -37,8 +37,7 @@ public class Banco {
             }
                 
         }
-        
-        
+       
     }
     
 }
