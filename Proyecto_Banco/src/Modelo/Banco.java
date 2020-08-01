@@ -25,12 +25,64 @@ public class Banco {
         String direccion = inOut.solicitarNombre("Digite su dirección: ");
         clientes.add(new Cliente(nombre,identificacion,direccion));
         
+        crearCuentas();
+        
+    }
+   
+    public void menuCliente(){
+        
+         int opcion = inOut.solicitarEntero("1. Editar información"
+                + "\n2. Ver mis cuentas  ");
+         
+         switch(opcion){
+             
+             case 1: break;
+             
+             case 2: 
+                 
+                 
+                 break;
+                 
+             
+         }
+        
+    }
+    
+    public void mostrarCuentas(){
+        
+        
+        
+        
     }
     
     public void crearCuentas(){
         
-        inOut.solicitarEntero("1. Cuenta de crédito"
-                + "2. ");
+       int opcion = inOut.solicitarEntero("1. Cuenta de crédito"
+                + "\n2. Cuenta de ahorros ");
+        
+        switch(opcion){
+            
+            case 1: 
+            
+            
+            
+        }
+    }
+    
+    public void crearCredito(){
+        
+        double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de crédito");
+        while(balance<=0 || balance>Credito.MONTO_MAX){
+            balance = inOut.solicitarDoubles("El balance no es correcto \nIngrese el balance nuevamente");
+        }
+        
+        
+        
+    }
+    
+    public void crearTarjeta(double monto){
+        
+        
         
         
     }
