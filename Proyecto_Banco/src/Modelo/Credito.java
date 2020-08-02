@@ -10,11 +10,6 @@ public class Credito extends Cuenta{
     {
         super(balance);
     }
-    public Credito(ArrayList<TarjetaCredito> tarjetas,double balance)
-    {
-        super(balance);
-        this.tarjetas=tarjetas;
-    }
     public void setListaTarjetas(ArrayList<TarjetaCredito> tarjetas)
     {
         this.tarjetas=tarjetas;
@@ -35,7 +30,9 @@ public class Credito extends Cuenta{
         }
         return monto;
     }
-    
+    public double getBalance(){
+        return super.getCuentabalance();
+    }
     public void setBalance(double balance){
         
         super.setCuentabalance(balance);
@@ -44,7 +41,7 @@ public class Credito extends Cuenta{
     @Override
     public String toString() {
         String mensaje="";
-        for(int i =0;i<this.tarjetas.size();i++)
+        for(int i =0;i<tarjetas.size();i++)
         {
             mensaje+= this.tarjetas.get(i).toString();
         }

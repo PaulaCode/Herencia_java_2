@@ -21,7 +21,7 @@ public class Ahorros extends Cuenta {
 
         super.setCuentabalance(balance);
     }
-
+    
     public double getBalance() {
 
         return super.getCuentabalance();
