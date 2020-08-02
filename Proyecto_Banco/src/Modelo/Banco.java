@@ -122,7 +122,7 @@ public class Banco {
             
             if(cedula == clientes.get(i).getIdentificacion()){
                 flag = true;
-                mensaje += ("El cliente es "+clientes.get(i).getNombre()+"con"
+                mensaje += ("El cliente es "+clientes.get(i).getNombre()
                         +   "\nDirección: "+clientes.get(i).getDireccion() 
                         +   "\nCédula es: "+clientes.get(i).getIdentificacion()
                        
