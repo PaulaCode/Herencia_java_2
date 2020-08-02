@@ -83,12 +83,15 @@ public class Banco {
         TarjetaCredito obj_tarjeta = new TarjetaCredito();
 
         obj_tarjeta.setNumero_tarjeta(numero_tarjeta);          //asignamos número de tarjeta
-        double monto = obj_cliente.credito.getTotal_monto();            //traemos el monto(suma de todos los montos de las tarjetas disponibles)
+        double monto = obj_cliente.credito.getTotal_monto();            //traemos el monto(suma de todos los montos de las tarjetas disponibles)       
         obj_tarjeta.setMonto(inOut.solicitarDoubles("Digite el monto que tendrá la tarjeta"));  //solicitamos el monto de esa tarjeta
 
-        while (obj_tarjeta.getMonto() + monto > obj_cliente.getCredito().getCuentabalance())//validamos que no sea mayor al balance de la cuenta
+        while (obj_tarjeta.getMonto() + monto > obj_cliente.getCredito().getCuentabalance() || obj_tarjeta.getMonto()<=0)//validamos que no sea mayor al balance de la cuenta
         {
-            obj_tarjeta.setMonto(inOut.solicitarDoubles("ADVERTENCIA: BALANCE EXCEDIDO\n" + "Su balance en crédito: $" + obj_cliente.credito.getCuentabalance() + " \nDigite el monto que tendrá la tarjeta"));
+            if(obj_tarjeta.getMonto() + monto > obj_cliente.getCredito().getCuentabalance())
+                obj_tarjeta.setMonto(inOut.solicitarDoubles("ADVERTENCIA: BALANCE EXCEDIDO\n" + "Su balance en crédito: $" + obj_cliente.credito.getCuentabalance() + " \nDigite el monto que tendrá la tarjeta"));
+            else
+               obj_tarjeta.setMonto(inOut.solicitarDoubles("No pueden ser números negativos. \nDigite nuevamente el monto: "));
         }
         obj_cliente.getCredito().setTarjeta(obj_tarjeta);
         String mensaje = "Señor/a " + obj_cliente.getNombre() + "\n" + "Las tarjetas a su disposición son: \n"
@@ -98,8 +101,11 @@ public class Banco {
     }
 
     public Ahorros crearAhorros() {
-
+ 
         double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de ahorros");
+        while(balance<0){
+            balance = inOut.solicitarDoubles("Balance erróneo. \nDigite nuevamente el balance.");
+        }
         double inter = (balance * interes) / 100;
 
         Ahorros ahorro = new Ahorros(inter, balance);
