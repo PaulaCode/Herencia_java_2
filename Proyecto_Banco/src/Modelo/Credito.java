@@ -43,7 +43,7 @@ public class Credito extends Cuenta{
         String mensaje="";
         for(int i =0;i<tarjetas.size();i++)
         {
-            mensaje+= tarjetas.toString();
+            mensaje+= this.tarjetas.get(i).toString();
         }
         return mensaje;
     }

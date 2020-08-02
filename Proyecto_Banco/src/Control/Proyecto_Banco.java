@@ -38,8 +38,8 @@ public class Proyecto_Banco {
             break;
         }
         case 3:{
-            
             banco.editarInfo();
+            
         }
         break;
         case 4:{
@@ -52,7 +52,7 @@ public class Proyecto_Banco {
     } 
       
       
-  }while(opc!=3);
+  }while(opc!=4);
       
     }
 

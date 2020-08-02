@@ -155,11 +155,56 @@ public class Banco {
     }
     
     public void editarInfo(){
-        
+        int opcion=0;
         int cedula = inOut.solicitarEntero("Digite su cédula");
-        boolean verificar;
+     if(cedula>0&&Verificarcc(cedula))
+         {
+          int posicion_cliente = returnCliente(cedula);
+
+        do
+        {    
+            String mensaje ="1.Crear Cuenta\n2.Crear una nueva tarjeta\n3.Salir\n\nDigite una opción:";
+            opcion=inOut.solicitarEntero(mensaje);     
+            
+            switch(opcion)
+            {
+                case 1:{
+                    crearCuentas(clientes.get(posicion_cliente));
+                    break;
+                }
+                case 2:{
+                    if(clientes.get(posicion_cliente).credito.getCuentabalance()!=0)
+                    {
+                      crearTarjeta(clientes.get(posicion_cliente),clientes.get(posicion_cliente).getCredito().getCuentabalance());
+                    }
+                    else
+                    {
+                        inOut.mostrarResultado("Usted no cuenta con una cuenta de crédito");
+                    }
+                    
+                    break;
+                }
+            }
+        }
+        while(opcion!=3);
+           
+         }
+         else
+         {
+            inOut.mostrarResultado("Datos erroneos");
+         }
+   
+    }
+    public int returnCliente(int identificacion){
         
-        
+        for(int i =0;i<clientes.size();i++)
+        {
+          if(clientes.get(i).getIdentificacion()==identificacion)
+          {
+              return i;
+          }
+        }
+        return -1;
     }
     
     public boolean verificarCuentas(Cliente obj_cliente,int opcion){
