@@ -146,7 +146,7 @@ public class Banco {
                     break;
                 }
                 case 2:{
-                    if(clientes.get(posicion_cliente).credito.getCuentabalance()!=0)
+                    if(clientes.get(posicion_cliente).credito!=null)
                     {
                       crearTarjeta(clientes.get(posicion_cliente),clientes.get(posicion_cliente).getCredito().getCuentabalance());
                     }
