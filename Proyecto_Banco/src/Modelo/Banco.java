@@ -103,7 +103,7 @@ public class Banco {
     
     public Ahorros crearAhorros(){
         
-        double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de crédito");
+        double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de ahorros");
         double inter = (balance * interes) / 100; 
         
         Ahorros ahorro = new Ahorros(inter,balance); 
