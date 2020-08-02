@@ -6,7 +6,10 @@ public class Credito extends Cuenta{
 
     private ArrayList<TarjetaCredito> tarjetas = new ArrayList<>();
     static final double MONTO_MAX = 10000000;
-   
+    public Credito(double balance)
+    {
+        super(balance);
+    }
     public Credito(ArrayList<TarjetaCredito> tarjetas,double balance)
     {
         super(balance);

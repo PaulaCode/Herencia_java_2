@@ -3,12 +3,12 @@ package Modelo;
 
 import Vista.InOut;
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
 
 public class Banco {
     
     ArrayList<Cliente> clientes = new ArrayList();
-    
+    int numero_tarjeta=0;
     InOut inOut = new InOut(); 
     
     public void crearCliente(){
@@ -23,7 +23,8 @@ public class Banco {
         }while(verificar != false);
         
         String direccion = inOut.solicitarNombre("Digite su dirección: ");
-        clientes.add(new Cliente(nombre,identificacion,direccion));
+        Cliente obj_cliente = new Cliente(nombre,identificacion,direccion);
+        clientes.add(obj_cliente);
 
     }
     
@@ -34,19 +35,20 @@ public class Banco {
          
          switch(opcion){
              
-             case 1: break;
-             
-             case 2: 
-                 
-                 
-                 break;
-                 
+             case 1:
+             {
+                 break;  
+             }
+             case 2:{
+                  break;
+             }  
+               
              
          }
         
     }
     
-    public void crearCuentas(){
+    public void crearCuentas(Cliente obj_cliente){
         
        int opcion = inOut.solicitarEntero("1. Cuenta de crédito"
                 + "\n2. Cuenta de ahorros ");
@@ -54,29 +56,44 @@ public class Banco {
         switch(opcion){
             
             case 1: 
-            
-            
-            
+            {
+                 double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de crédito");
+                 while(balance<=0 || balance>Credito.MONTO_MAX){
+                 balance = inOut.solicitarDoubles("El balance no es correcto \nIngrese el balance nuevamente");
+                 }
+                 crearTarjeta(obj_cliente,balance);
+                break;
+            }
+            case 2:{
+                break;
+            }
+
         }
     }
     
-    public void crearCredito(){
+
+    public void crearTarjeta(Cliente obj_cliente,double balance)
+    {
+        numero_tarjeta++;  //aumentamos el número tarjeta
+        Credito obj_credito = new Credito(balance);
+        TarjetaCredito obj_tarjeta = new TarjetaCredito();
         
-        double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de crédito");
-        while(balance<=0 || balance>Credito.MONTO_MAX){
-            balance = inOut.solicitarDoubles("El balance no es correcto \nIngrese el balance nuevamente");
+        obj_tarjeta.setNumero_tarjeta(numero_tarjeta);          //asignamos número de tarjeta
+        double monto = obj_credito.getTotal_monto();            //traemos el monto(suma de todos los montos de las tarjetas disponibles)
+        obj_tarjeta.setMonto(inOut.solicitarDoubles("Digite el monto que tendrá la tarjeta"));  //solicitamos el monto de esa tarjeta
+        
+        while(obj_tarjeta.getMonto()+monto>obj_credito.getCuentabalance())//validamos que no sea mayor al balance de la cuenta
+        {
+          obj_tarjeta.setMonto(inOut.solicitarDoubles("ADVERTENCIA: BALANCE EXCEDIDO\n"+"Su balance en crédito: $"+obj_cliente.credito.getCuentabalance()+"Digite el monto que tendrá la tarjeta"));  
         }
-        
-        
-        
+        obj_credito.setTarjeta(obj_tarjeta);
+        obj_cliente.setCredito(obj_credito);
+        String mensaje = "Señor/a "+obj_cliente.getNombre()+"\n"+"Las tarjetas a su disposición son: \n"+
+                obj_cliente.credito.toString(); //muestra las tarjetas
+                ;
+        inOut.mostrarResultado(mensaje);
     }
-    
-    public void crearTarjeta(double monto){
-        
-        
-        
-        
-    }
+
     
     public void buscarCliente(){
         
