@@ -38,8 +38,8 @@ public class Proyecto_Banco {
             break;
         }
         case 3:{
-            banco.editarInfo();        
-
+            banco.editarInfo();
+            
         }
         break;
         case 4:{

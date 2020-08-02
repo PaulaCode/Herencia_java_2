@@ -128,15 +128,15 @@ public class Banco {
                     mensaje += ("\nEl balance de la cuenta de la cuenta de crédito es " + clientes.get(i).credito.getBalance()
                             + "\nY sus tarjetas de cŕedito son: " + clientes.get(i).getCredito().toString());
 
-                }
+                 }
+              }
 
             }
+              if(flag ==true)
             inOut.mostrarResultado(mensaje);
-            if (flag == false) {
+                else 
                 inOut.mostrarResultado("No hay un cliente con esa identificación.");
-            }
-
-        }
+         
     }
 
     public boolean Verificarcc(int c) {
