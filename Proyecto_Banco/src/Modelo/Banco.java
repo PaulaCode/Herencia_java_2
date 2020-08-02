@@ -103,7 +103,7 @@ public class Banco {
     
     public Ahorros crearAhorros(){
         
-        double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de crédito");
+        double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de ahorros");
         double inter = (balance * interes) / 100; 
         
         Ahorros ahorro = new Ahorros(inter,balance); 
@@ -173,7 +173,7 @@ public class Banco {
                     break;
                 }
                 case 2:{
-                    if(clientes.get(posicion_cliente).credito.getCuentabalance()!=0)
+                    if(clientes.get(posicion_cliente).credito!=null)
                     {
                       crearTarjeta(clientes.get(posicion_cliente),clientes.get(posicion_cliente).getCredito().getCuentabalance());
                     }
