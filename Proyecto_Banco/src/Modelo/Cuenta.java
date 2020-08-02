@@ -4,9 +4,7 @@ package Modelo;
 
 public class Cuenta  {
     private double cuentabalance; 
-
-
-
+   
     public Cuenta(double cuentabalance) {
         this.cuentabalance = cuentabalance;
     }
@@ -15,8 +13,8 @@ public class Cuenta  {
         return cuentabalance;
     }
 
-    public void setCuentabalance(int cuentabalance) {
-        this.cuentabalance = cuentabalance;
+    public void setCuentabalance(double cuentabalance) {
+        this.cuentabalance += cuentabalance;
     }
     
  

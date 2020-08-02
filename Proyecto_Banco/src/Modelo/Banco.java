@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Banco {
     
     ArrayList<Cliente> clientes = new ArrayList();
-    
+    public final double interes = 0.5;
     InOut inOut = new InOut(); 
     
     public void crearCliente(){
@@ -23,30 +23,15 @@ public class Banco {
         }while(verificar != false);
         
         String direccion = inOut.solicitarNombre("Digite su dirección: ");
-        clientes.add(new Cliente(nombre,identificacion,direccion));
+        
+        Cliente cliente = new Cliente(nombre,identificacion,direccion);
+        clientes.add(cliente);
+        
+        crearCuentas(cliente);
 
     }
-    
-    public void menuPrincipal(){
-        
-         int opcion = inOut.solicitarEntero("1. Registrarse"
-                + "\n2. Banco.  ");
-         
-         switch(opcion){
-             
-             case 1: break;
-             
-             case 2: 
-                 
-                 
-                 break;
-                 
-             
-         }
-        
-    }
-    
-    public void crearCuentas(){
+  
+    public void crearCuentas(Cliente cliente){
         
        int opcion = inOut.solicitarEntero("1. Cuenta de crédito"
                 + "\n2. Cuenta de ahorros ");
@@ -55,7 +40,12 @@ public class Banco {
             
             case 1: 
             
+            break;
             
+            case 2:
+                Ahorros ahorro = crearAhorros();
+                cliente.setAhorros(ahorro);
+            break;
             
         }
     }
@@ -78,6 +68,16 @@ public class Banco {
         
     }
     
+    public Ahorros crearAhorros(){
+        
+        double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de crédito");
+        double inter = (balance * interes) / 100; 
+        
+        Ahorros ahorro = new Ahorros(inter,balance); 
+        
+        return ahorro;
+    }
+    
     public void buscarCliente(){
         
         int cedula = inOut.solicitarEntero("Digite el número de identificación del cliente que quiere buscar: ");
@@ -89,6 +89,7 @@ public class Banco {
                 inOut.mostrarResultado("El cliente es "+clientes.get(i).getNombre()+"con"
                         +   "\nDirección: "+clientes.get(i).getDireccion() +  ", su"
                         +   "cédula es: "+clientes.get(i).getIdentificacion()
+                        +   ""
                 );
                
             }
