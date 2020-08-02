@@ -8,18 +8,18 @@ package Modelo;
 
 public class Cliente {
     
-    final String nombre;
-    final int identificacion;
-    String direccion;
+    private final String nombre;
+    private final int identificacion;
+    private String direccion;
     Credito credito;
     Ahorros ahorros;
 
-    public Cliente(String nombre, int identificacion, String direcccion) {
+      public Cliente(String nombre, int identificacion, String direccion) {
         this.nombre = nombre;
         this.identificacion = identificacion;
         this.direccion = direccion;
     }
-
+      
     public String getNombre() {
         return nombre;
     }
@@ -48,9 +48,7 @@ public class Cliente {
         this.ahorros = ahorros;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+
    
    
 }

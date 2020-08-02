@@ -36,13 +36,18 @@ public class Banco {
     }
   
     public void crearCuentas(Cliente obj_cliente){
-
-       int opcion = inOut.solicitarEntero("1. Cuenta de crédito"
-                + "\n2. Cuenta de ahorros ");
+        int opcion;
+        do{
+        opcion = inOut.solicitarEntero("1. Cuenta de crédito"
+                + "\n2. Cuenta de ahorros "
+                + "\n3. Salir "
+                );
         
         switch(opcion){
             
             case 1: {
+                 if(verificarCuentas(obj_cliente,opcion) == true){
+                
                  double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de crédito");
                  while(balance<=0 || balance>Credito.MONTO_MAX){
                  balance = inOut.solicitarDoubles("El balance no es correcto \nIngrese el balance nuevamente");
@@ -50,15 +55,28 @@ public class Banco {
                  Credito creditos = new Credito(balance);
                  obj_cliente.credito = creditos;
                  crearTarjeta(obj_cliente,balance);
-                break;
+               
+                 }else{
+                     inOut.mostrarResultado("Ya tiene registrada una cuenta de crédito.");
+                 }
+                  break;
             }
             case 2:{
+                if(verificarCuentas(obj_cliente,opcion) == true){
                 Ahorros ahorro = crearAhorros();
                 obj_cliente.setAhorros(ahorro);
+                }else{
+                     inOut.mostrarResultado("Ya tiene registrada una cuenta de ahorros.");
+                 }
                 break;
             }
-
+            case 3:
+                break;
+            default: {
+                    inOut.mostrarResultado("Ninguna opción válida fue elegida");
+                }
         }
+        }while(opcion!=3);
     }
     
 
@@ -95,6 +113,8 @@ public class Banco {
     
     public void buscarCliente(){
         
+        String mensaje = " ";
+        
         int cedula = inOut.solicitarEntero("Digite el número de identificación del cliente que quiere buscar: ");
         boolean flag = false;
         
@@ -102,20 +122,26 @@ public class Banco {
             
             if(cedula == clientes.get(i).getIdentificacion()){
                 flag = true;
-                inOut.mostrarResultado("El cliente es "+clientes.get(i).getNombre()+"con"
-                        +   "\nDirección: "+clientes.get(i).getDireccion() +  ", su"
+                mensaje += ("El cliente es "+clientes.get(i).getNombre()+"con"
+                        +   "\nDirección: "+clientes.get(i).getDireccion() 
                         +   "\nCédula es: "+clientes.get(i).getIdentificacion()
-                        +   "\nEl balance de la cuenta de ahorros es "+clientes.get(i).getAhorros().getBalance()
-                        +   "\nEl balance de la cuenta de la cuenta de crédito es " +clientes.get(i).getCredito().getTotal_monto()
-                        +   "\nY sus tarjetas de cŕedito son: "+ clientes.get(i).getCredito().toString()
+                       
                 );
-               
+               if(clientes.get(i).ahorros != null){
+                mensaje+= ("\nEl balance de la cuenta de ahorros es "+clientes.get(i).getAhorros().getBalance());
+                }
+                if(clientes.get(i).credito != null){
+                mensaje+=  ("\nEl balance de la cuenta de la cuenta de crédito es " +clientes.get(i).credito.getBalance()
+                              +   "\nY sus tarjetas de cŕedito son: "+ clientes.get(i).getCredito().toString());
+                        
             } 
-                
+          
         }
+        inOut.mostrarResultado(mensaje);
         if(flag== false)
             inOut.mostrarResultado("No hay un cliente con esa identificación.");
        
+    }
     }
     
     public boolean Verificarcc(int c) {
@@ -136,4 +162,17 @@ public class Banco {
         
     }
     
+    public boolean verificarCuentas(Cliente obj_cliente,int opcion){
+            
+        if(opcion ==1){
+        if(obj_cliente.getCredito() == null)
+            return true;
+        }else{
+            if(obj_cliente.getAhorros() == null)
+                return true;
+        }
+        return false;
+    }
+    
 }
+        

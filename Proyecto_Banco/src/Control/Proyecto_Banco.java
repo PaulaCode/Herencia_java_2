@@ -39,7 +39,7 @@ public class Proyecto_Banco {
         }
         case 3:{
             
-            
+            banco.editarInfo();
         }
         break;
         case 4:{
