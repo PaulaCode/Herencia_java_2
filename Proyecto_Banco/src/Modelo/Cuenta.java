@@ -13,8 +13,8 @@ public class Cuenta  {
         return cuentabalance;
     }
 
-    public void setCuentabalance(int cuentabalance) {
-        this.cuentabalance = cuentabalance;
+    public void setCuentabalance(double cuentabalance) {
+        this.cuentabalance += cuentabalance;
     }
     
  

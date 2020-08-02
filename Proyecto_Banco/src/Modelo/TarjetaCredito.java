@@ -30,9 +30,8 @@ public class TarjetaCredito {
         this.monto = monto;
     }
 
-    @Override
     public String toString() {
-        return "Número: " + numero_tarjeta + " Monto: $" + monto+"\n";
+        return "Número: " + this.numero_tarjeta + " Monto: $" + this.monto+"\n";
     }
     
 }

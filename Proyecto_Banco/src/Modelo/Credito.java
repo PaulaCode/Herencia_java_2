@@ -35,12 +35,18 @@ public class Credito extends Cuenta{
         }
         return monto;
     }
+    
+    public void setBalance(double balance){
+        
+        super.setCuentabalance(balance);
+        
+    }
     @Override
     public String toString() {
         String mensaje="";
         for(int i =0;i<this.tarjetas.size();i++)
         {
-            mensaje+="Número: "+this.tarjetas.toString();
+            mensaje+= this.tarjetas.get(i).toString();
         }
         return mensaje;
     }
