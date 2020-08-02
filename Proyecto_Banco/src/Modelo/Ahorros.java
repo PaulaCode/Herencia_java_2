@@ -1,9 +1,7 @@
-
 package Modelo;
 
+public class Ahorros extends Cuenta {
 
-public class Ahorros extends Cuenta{
-    
     private double Interes;
 
     public Ahorros(double Interes, double cuentabalance) {
@@ -18,14 +16,14 @@ public class Ahorros extends Cuenta{
     public void setInteres(int Interes) {
         this.Interes = Interes;
     }
-    
-    public void setBalance(double balance){
-        
-       super.setCuentabalance(balance);
+
+    public void setBalance(double balance) {
+
+        super.setCuentabalance(balance);
     }
-    
-    public double getBalance(){
-        
+
+    public double getBalance() {
+
         return super.getCuentabalance();
     }
 }

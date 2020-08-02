@@ -13,33 +13,36 @@ public class Proyecto_Banco {
         
         InOut inOut = new InOut();
         int opc=0;
-     
-       String clavead="";
+
        Banco banco = new Banco();
   do {
       String mensaje=" ";
-      mensaje+=" \n 1. Registrarse"
+      mensaje+="1. Registrarse"
                 + "\n 2. Modo banco "
-                + "\n 3. Salir";
+                + "\n 3. Editar información "
+                + "\n 4. Salir";
      opc= inOut.solicitarEntero(mensaje);
       
     switch (opc){
         case 1:{
-           clavead= inOut.solicitarNombre("Ingrese la clave de banco: ");
-            if(clavead.equals(clave)){
-                 
-                banco.buscarCliente();
-             
-            } else
-                inOut.mostrarResultado("Clave incorrecta.");
-                
+                   banco.crearCliente();
+               
             break;
                 }
         case 2:{
-                banco.crearCliente();
+        String clavead= inOut.solicitarNombre("Ingrese la clave de banco: ");
+            if(clavead.equals(clave)){
+               banco.buscarCliente();
+                 } else
+                inOut.mostrarResultado("Clave incorrecta.");
             break;
         }
         case 3:{
+            
+            
+        }
+        break;
+        case 4:{
             System.exit(0);
             break;
         }

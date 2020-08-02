@@ -6,7 +6,10 @@ public class Credito extends Cuenta{
 
     private ArrayList<TarjetaCredito> tarjetas = new ArrayList<>();
     static final double MONTO_MAX = 10000000;
-   
+    public Credito(double balance)
+    {
+        super(balance);
+    }
     public Credito(ArrayList<TarjetaCredito> tarjetas,double balance)
     {
         super(balance);
@@ -32,12 +35,18 @@ public class Credito extends Cuenta{
         }
         return monto;
     }
+    
+    public void setBalance(double balance){
+        
+        super.setCuentabalance(balance);
+        
+    }
     @Override
     public String toString() {
         String mensaje="";
         for(int i =0;i<this.tarjetas.size();i++)
         {
-            mensaje+="Número: "+this.tarjetas.toString();
+            mensaje+= this.tarjetas.toString();
         }
         return mensaje;
     }

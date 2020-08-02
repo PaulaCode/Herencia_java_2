@@ -5,7 +5,10 @@ package Modelo;
 public class TarjetaCredito {
     private int numero_tarjeta;
     private double monto;
-
+    public TarjetaCredito()
+    {
+        
+    }
     public TarjetaCredito(int numero_tarjeta, double monto) {
         this.numero_tarjeta = numero_tarjeta;
         this.monto = monto;
@@ -27,9 +30,8 @@ public class TarjetaCredito {
         this.monto = monto;
     }
 
-    @Override
     public String toString() {
-        return "Número: " + numero_tarjeta + " Monto: $" + monto+"\n";
+        return ("Número: " + numero_tarjeta + " Monto: $" + monto+"\n");
     }
     
 }
