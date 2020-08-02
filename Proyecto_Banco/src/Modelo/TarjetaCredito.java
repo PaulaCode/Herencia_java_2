@@ -31,7 +31,7 @@ public class TarjetaCredito {
     }
 
     public String toString() {
-        return "Número: " + this.numero_tarjeta + " Monto: $" + this.monto+"\n";
+        return "Número: " + this.numero_tarjeta + " Monto: $" + this.monto+"\n"+ "Y su impuesto es de "+((this.monto*0.5)/100)+"\n";
     }
     
 }
