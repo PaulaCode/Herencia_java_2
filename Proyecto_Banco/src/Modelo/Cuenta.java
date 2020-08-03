@@ -18,5 +18,10 @@ public class Cuenta  {
         this.cuentabalance += cuentabalance;
     }
     
+       public void setBalanceQuitar(double cuentabalance) {
+        this.cuentabalance -= cuentabalance;
+    }
+    
+    
  
 }

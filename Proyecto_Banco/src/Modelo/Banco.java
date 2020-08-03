@@ -25,9 +25,10 @@ public class Banco {
             verificar = Verificarcc(identificacion);
         } while (verificar != false);
 
+        String contrasena = inOut.solicitarNombre("Digite la contraseña que desee");
         String direccion = inOut.solicitarNombre("Digite su dirección: ");
 
-        Cliente obj_cliente = new Cliente(nombre, identificacion, direccion);
+        Cliente obj_cliente = new Cliente(nombre, identificacion, direccion, contrasena);
         clientes.add(obj_cliente);
 
         crearCuentas(obj_cliente);
@@ -86,12 +87,13 @@ public class Banco {
         double monto = obj_cliente.credito.getTotal_monto();            //traemos el monto(suma de todos los montos de las tarjetas disponibles)       
         obj_tarjeta.setMonto(inOut.solicitarDoubles("Digite el monto que tendrá la tarjeta"));  //solicitamos el monto de esa tarjeta
 
-        while (obj_tarjeta.getMonto() + monto > obj_cliente.getCredito().getCuentabalance() || obj_tarjeta.getMonto()<=0)//validamos que no sea mayor al balance de la cuenta
+        while (obj_tarjeta.getMonto() + monto > obj_cliente.getCredito().getCuentabalance() || obj_tarjeta.getMonto() <= 0)//validamos que no sea mayor al balance de la cuenta
         {
-            if(obj_tarjeta.getMonto() + monto > obj_cliente.getCredito().getCuentabalance())
+            if (obj_tarjeta.getMonto() + monto > obj_cliente.getCredito().getCuentabalance()) {
                 obj_tarjeta.setMonto(inOut.solicitarDoubles("ADVERTENCIA: BALANCE EXCEDIDO\n" + "Su balance en crédito: $" + obj_cliente.credito.getCuentabalance() + " \nDigite el monto que tendrá la tarjeta"));
-            else
-               obj_tarjeta.setMonto(inOut.solicitarDoubles("No pueden ser números negativos. \nDigite nuevamente el monto: "));
+            } else {
+                obj_tarjeta.setMonto(inOut.solicitarDoubles("No pueden ser números negativos. \nDigite nuevamente el monto: "));
+            }
         }
         obj_cliente.getCredito().setTarjeta(obj_tarjeta);
         String mensaje = "Señor/a " + obj_cliente.getNombre() + "\n" + "Las tarjetas a su disposición son: \n"
@@ -101,9 +103,9 @@ public class Banco {
     }
 
     public Ahorros crearAhorros() {
- 
+
         double balance = inOut.solicitarDoubles("Digite el balance de su cuenta de ahorros");
-        while(balance<0){
+        while (balance < 0) {
             balance = inOut.solicitarDoubles("Balance erróneo. \nDigite nuevamente el balance.");
         }
         double inter = (balance * interes) / 100;
@@ -134,15 +136,16 @@ public class Banco {
                     mensaje += ("\nEl balance de la cuenta de la cuenta de crédito es " + clientes.get(i).credito.getBalance()
                             + "\nY sus tarjetas de cŕedito son: " + clientes.get(i).getCredito().toString());
 
-                 }
-              }
-
+                }
             }
-              if(flag ==true)
+
+        }
+        if (flag == true) {
             inOut.mostrarResultado(mensaje);
-                else 
-                inOut.mostrarResultado("No hay un cliente con esa identificación.");
-         
+        } else {
+            inOut.mostrarResultado("No hay un cliente con esa identificación.");
+        }
+
     }
 
     public boolean Verificarcc(int c) {
@@ -160,32 +163,65 @@ public class Banco {
         int cedula = inOut.solicitarEntero("Digite su cédula");
         if (cedula > 0 && Verificarcc(cedula)) {
             int posicion_cliente = returnCliente(cedula);
+            String contrasena = inOut.solicitarNombre("Digite su contraseña");
+            if (contrasena.equals(clientes.get(posicion_cliente).getContrasena())) {
+                do {
+                    String mensaje = "1.Crear Cuenta\n2.Crear una nueva tarjeta\n3.Cambiar contraseña \n4. Cambiar dirección \n5. Salir\n\nDigite una opción:";
+                    opcion = inOut.solicitarEntero(mensaje);
 
-            do {
-                String mensaje = "1.Crear Cuenta\n2.Crear una nueva tarjeta\n3.Salir\n\nDigite una opción:";
-                opcion = inOut.solicitarEntero(mensaje);
+                    switch (opcion) {
+                        case 1: {
+                            crearCuentas(clientes.get(posicion_cliente));
+                            break;
+                        }
+                        case 2: {
+                            if (clientes.get(posicion_cliente).credito != null) {
+                                crearTarjeta(clientes.get(posicion_cliente), clientes.get(posicion_cliente).getCredito().getCuentabalance());
+                            } else {
+                                inOut.mostrarResultado("Usted no cuenta con una cuenta de crédito");
+                            }
 
-                switch (opcion) {
-                    case 1: {
-                        crearCuentas(clientes.get(posicion_cliente));
-                        break;
-                    }
-                    case 2: {
-                        if (clientes.get(posicion_cliente).credito != null) {
-                            crearTarjeta(clientes.get(posicion_cliente), clientes.get(posicion_cliente).getCredito().getCuentabalance());
-                        } else {
-                            inOut.mostrarResultado("Usted no cuenta con una cuenta de crédito");
+                            break;
+                        }
+                        case 3: {
+
+                            String contrasena1 = inOut.solicitarNombre("Digite su contraseña actual: ");
+                            if (contrasena1.equals(clientes.get(posicion_cliente).getContrasena())) {
+
+                                String nuevacontrasena = inOut.solicitarNombre("Digite su nueva contraseña");
+                                clientes.get(posicion_cliente).setContrasena(nuevacontrasena);
+
+                                inOut.mostrarResultado("Contraseña cambiada con éxito");
+
+                            } else {
+                                inOut.mostrarResultado("Contraseña incorrecta");
+                            }
+                            break;
                         }
 
-                        break;
-                    }
-                }
-            } while (opcion != 3);
+                        case 4: {
 
+                            String direccion = inOut.solicitarNombre("Digite su nueva direccion");
+                            clientes.get(posicion_cliente).setDireccion(direccion);
+                            inOut.mostrarResultado("Dirección cambiada con éxito");
+                        }
+
+                        case 5:
+
+                            break;
+
+                        default:
+                            inOut.mostrarResultado("Ninguna opción fue elegida con éxito.");
+
+                    }
+                } while (opcion != 5);
+            } else {
+                inOut.mostrarResultado("Contraseña incorrecta.");
+            }
         } else {
             inOut.mostrarResultado("Datos erroneos");
         }
-
+       
     }
 
     public int returnCliente(int identificacion) {
@@ -210,6 +246,125 @@ public class Banco {
             }
         }
         return false;
+    }
+
+    public void transacciones() {
+
+        int opcion = 0;
+        int cedula = inOut.solicitarEntero("Digite su cédula");
+        if (cedula > 0 && Verificarcc(cedula)) {
+            int posicion_cliente = returnCliente(cedula);
+            if (clientes.get(posicion_cliente).ahorros != null) {
+                String contrasena = inOut.solicitarNombre("Digite su contraseña");
+                if (contrasena.equals(clientes.get(posicion_cliente).getContrasena())) {
+                    do {
+                        String mensaje = "1.Consignar\n2.Retirar\n3.Saldo\n4.Salir\n\nDigite una opción:";
+                        opcion = inOut.solicitarEntero(mensaje);
+
+                        switch (opcion) {
+                            case 1: {
+                                double consignar = inOut.solicitarDoubles("Digite la cantidad que quiere consignar");
+                                clientes.get(posicion_cliente).ahorros.setBalance(consignar);
+                                break;
+                            }
+                            case 2: {
+                                int opcion1;
+                                do {
+                                    String mensaje1 = "1. 50.000        2. 100.000 \n3. 150.000       4. 200.000 \n        5. Otro valor. \n6. Salir \n\nDigite una opción:";
+                                    opcion1 = inOut.solicitarEntero(mensaje1);
+                                    switch (opcion1) {
+
+                                        case 1: {
+                                            while (50000 > clientes.get(posicion_cliente).ahorros.getBalance()) {
+                                                opcion1 = inOut.solicitarEntero("No tiene saldo suficiente para retirar \nDigite otra opción");
+                                            }
+
+                                            clientes.get(posicion_cliente).ahorros.setBalanceQuitar(50000);
+                                            inOut.mostrarResultado("Ha retirado 50.000 con éxito");
+
+                                            break;
+                                        }
+                                        case 2: {
+
+                                            while (100000 > clientes.get(posicion_cliente).ahorros.getBalance()) {
+                                                opcion1 = inOut.solicitarEntero("No tiene saldo suficiente para retirar \nDigite otra opción");
+                                            }
+
+                                            clientes.get(posicion_cliente).ahorros.setBalanceQuitar(100000);
+
+                                            inOut.mostrarResultado("Ha retirado 100.000 con éxito");
+                                            break;
+                                        }
+                                        case 3: {
+
+                                            while (150000 > clientes.get(posicion_cliente).ahorros.getBalance()) {
+                                                opcion1 = inOut.solicitarEntero("No tiene saldo suficiente para retirar \nDigite otra opción");
+                                            }
+
+                                            clientes.get(posicion_cliente).ahorros.setBalanceQuitar(150000);
+
+                                            inOut.mostrarResultado("Ha retirado 150.000 con éxito");
+                                            break;
+                                        }
+
+                                        case 4: {
+
+                                            while (200000 > clientes.get(posicion_cliente).ahorros.getBalance()) {
+                                                opcion1 = inOut.solicitarEntero("No tiene saldo suficiente para retirar \nDigite otra opción");
+                                            }
+
+                                            clientes.get(posicion_cliente).ahorros.setBalanceQuitar(200000);
+
+                                            inOut.mostrarResultado("Ha retirado 200.000 con éxito");
+                                            break;
+                                        }
+                                        case 5: {
+
+                                            double retirar = inOut.solicitarDoubles("Digite la cantidad de dinero que desea retirar");
+
+                                            while (retirar > clientes.get(posicion_cliente).ahorros.getBalance()) {
+                                                opcion1 = inOut.solicitarEntero("No tiene saldo suficiente para retirar \nDigite otra opción");
+                                            }
+
+                                            clientes.get(posicion_cliente).ahorros.setBalanceQuitar(retirar);
+
+                                            inOut.mostrarResultado("Ha retirado " + retirar + " con éxito");
+                                            break;
+                                        }
+                                        case 6:
+                                            break;
+
+                                        default:
+                                            inOut.mostrarResultado("Ninguna opción válida fue elegida.");
+                                    }
+
+                                } while (opcion1 != 6);
+                            }
+                            case 3: {
+
+                                inOut.mostrarResultado("Su saldo es de: " + clientes.get(posicion_cliente).ahorros.getBalance());
+                                break;
+                            }
+
+                            case 4:
+                                break;
+
+                            default:
+                                inOut.mostrarResultado("Ninguna opción válida fue elegida.");
+
+                        }
+                    } while (opcion != 4);
+
+                } else {
+                    inOut.mostrarResultado("Contraseña incorrecta");
+                }
+            } else {
+                inOut.mostrarResultado("Usted no posee una cuenta de ahorros.");
+            }
+
+        } else {
+            inOut.mostrarResultado("Datos erróneos");
+        }
     }
 
 }

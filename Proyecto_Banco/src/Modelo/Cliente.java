@@ -11,13 +11,23 @@ public class Cliente {
     private final String nombre;
     private final int identificacion;
     private String direccion;
+    private String contrasena;
     Credito credito;
     Ahorros ahorros;
 
-      public Cliente(String nombre, int identificacion, String direccion) {
+      public Cliente(String nombre, int identificacion, String direccion,String contrasena) {
         this.nombre = nombre;
         this.identificacion = identificacion;
         this.direccion = direccion;
+        this.contrasena = contrasena;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
       
     public String getNombre() {
@@ -32,6 +42,10 @@ public class Cliente {
         return direccion;
     }
 
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
     public Credito getCredito() {
         return credito;
     }

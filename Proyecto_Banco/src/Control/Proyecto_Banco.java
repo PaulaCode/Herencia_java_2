@@ -20,7 +20,8 @@ public class Proyecto_Banco {
       mensaje+="1. Registrarse"
                 + "\n 2. Modo banco "
                 + "\n 3. Editar información "
-                + "\n 4. Salir";
+                + "\n 4. Transacción "
+                + "\n 5. Salir";
      opc= inOut.solicitarEntero(mensaje);
       
     switch (opc){
@@ -39,10 +40,15 @@ public class Proyecto_Banco {
         }
         case 3:{
             banco.editarInfo();
-            
+            break;
         }
-        break;
+        
         case 4:{
+            banco.transacciones();
+            break;
+        }
+           
+        case 5:{
             System.exit(0);
             break;
         }
@@ -50,9 +56,7 @@ public class Proyecto_Banco {
                     inOut.mostrarResultado("Ninguna opción válida fue elegida");
                 }
     } 
-      
-      
-  }while(opc!=4);
+  }while(opc!=5);
       
     }
 

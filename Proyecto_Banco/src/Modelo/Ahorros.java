@@ -22,6 +22,11 @@ public class Ahorros extends Cuenta {
         super.setCuentabalance(balance);
     }
     
+    @Override
+   public void setBalanceQuitar(double cuentabalance) {
+        super.setBalanceQuitar(cuentabalance);
+    }
+    
     public double getBalance() {
 
         return super.getCuentabalance();
